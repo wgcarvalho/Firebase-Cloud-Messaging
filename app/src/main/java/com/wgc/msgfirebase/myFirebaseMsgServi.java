@@ -30,8 +30,7 @@ public class myFirebaseMsgServi extends FirebaseMessagingService {
         }
     }
 
-
-    private void enviarNotificacao(String msg){//segunda aula será esse metodo
+    private void enviarNotificacao(String msg){
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,PendingIntent.FLAG_ONE_SHOT);
