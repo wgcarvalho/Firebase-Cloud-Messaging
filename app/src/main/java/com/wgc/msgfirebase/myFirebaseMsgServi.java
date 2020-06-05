@@ -25,14 +25,9 @@ public class myFirebaseMsgServi extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         if (remoteMessage.getNotification()!=null && remoteMessage.getData().size()<1){//verifica se há uma notificação
             Log.d("TAG-FCM","Mensagem da notificação: "+remoteMessage.getNotification().getBody());
-         //   enviarNotificacao(remoteMessage.getNotification().getBody());
-           // Toast.makeText(getApplicationContext(), remoteMessage.getNotification().getBody(), Toast.LENGTH_SHORT).show();
+           enviarNotificacao(remoteMessage.getNotification().getBody());
+           
         }
-/*
-        if (remoteMessage.getData().size()>0){ // vieram dados na mensagem
-            //Log.d("TAG-FCM","Dados: "+remoteMessage.getData());
-           // enviarDados(remoteMessage.getNotification().getBody(), remoteMessage.getData());
-        }*/
     }
 
 
@@ -53,39 +48,5 @@ public class myFirebaseMsgServi extends FirebaseMessagingService {
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
-
-
-    }
-
-    private void enviarDados(String msg, Map<String,String> dados){//terceira aula será esse metodo
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-
-        //foi criado daqui
-        Bundle bundle = new Bundle();
-
-        for (String key: dados.keySet()) {
-            String valor = dados.get(key).toString();
-            bundle.putString(key, valor);
-        }
-
-        intent.putExtras(bundle);
-        //ate aqui
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,PendingIntent.FLAG_ONE_SHOT);
-
-        Uri uriSom = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);//som para notificar
-
-        NotificationCompat.Builder notificationBuilder =  new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(android.R.drawable.ic_dialog_info)//icone que ira aparecer
-                .setContentTitle("Firebase Message")//titulo da mensagem
-                .setContentText(msg)//texto da mensagem
-                .setAutoCancel(true)//fecha automaticamente ao ser clicada
-                .setSound(uriSom)//cadastra o som que deve emitir ao notificar
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
-
-
     }
 }
