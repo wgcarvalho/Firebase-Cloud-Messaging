@@ -17,20 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //tudo que esta dentro do if é para a terceira aula
-        if (getIntent().getExtras() != null){
-
-            String nome = getIntent().getExtras().get("promocao_nome").toString();
-            String valor = getIntent().getExtras().get("promocao_valor").toString();
-            String validade = getIntent().getExtras().get("promocao_validade").toString();
-
-            TextView textView = (TextView)findViewById(R.id.txResult);
-
-            textView.setText(nome + valor+validade);
-
         }
-        findViewById(R.id.button).setOnClickListener(this);
-    }
 
     @Override
     public void onClick(View view) {
